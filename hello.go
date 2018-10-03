@@ -7,27 +7,30 @@ import (
 func main() {
 	name := "Alef"
 	version := 24
+	var command int
+
 
 	fmt.Println("Versão do programa: ", version)
-
 	fmt.Println("Olá", name, "qual opção o senhor gostaria de executar?")
 
 	fmt.Println("1- Iniciar o monitoramento")
 	fmt.Println("2- Exibir logs")
 	fmt.Println("0- sair do programa")
 
-	var command int
-
 	fmt.Scan(&command)
 
-	if command == 1 {
+	switch command {
+	case 1:
 		fmt.Println("Monitorando...")
-	} else if command == 2 {
+	case 2:
 		fmt.Println("Logs: ")
-	} else if command == 0 {
+
+	case 0:
 		fmt.Println("Programa finalizado.")
-	} else {
+
+	default:
 		fmt.Println("Comando inválido.")
+
 	}
 
 }
