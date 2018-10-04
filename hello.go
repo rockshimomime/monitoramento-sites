@@ -1,6 +1,7 @@
 package main
 
 import (
+	"time"
 	"fmt"
 	"net/http"
 	"os"
@@ -10,14 +11,13 @@ func main() {
 	name := "Alef"
 	var version float32 = 1.0
 
-	showIntroduction(name, version)
-
 	for {
+		showIntroduction(name, version)
 		command := readCommand()
 
 		switch command {
 		case 1:
-			monitoring()
+			startMonitoring()
 		case 2:
 			fmt.Println("Logs: ")
 
@@ -49,9 +49,24 @@ func readCommand() int {
 	return command
 }
 
-func monitoring() {
+func startMonitoring() {
 	fmt.Println("Iniciando monitoramento")
-	site := "http://random-status-code.herokuapp.com/"
+	sites := []string{"http://random-status-code.herokuapp.com/", "http://google.com/"}
+
+	for {
+		for i, site := range sites {
+			fmt.Println("Testando site ", i, ": ", site)
+			testingSite(site)
+			fmt.Println()
+
+		}
+		time.Sleep(5 * time.Second)
+	}
+
+}
+
+func testingSite(site string) {
+
 	response, _ := http.Get(site)
 
 	if response.StatusCode == 200 {
